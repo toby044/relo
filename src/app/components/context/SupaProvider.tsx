@@ -1,11 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-const viteUrl = process.env.VITE_SUPABASE_URL;
-const supabase = createClient(
+const _viteUrl = process.env.VITE_SUPABASE_URL;
+const _supabase = createClient(
   process.env.VITE_SUPABASE_URL as string,
-  process.env.VITE_SUPABASE_PUBLISHABLE_KEY as string
+  process.env.VITE_SUPABASE_PUBLISHABLE_KEY as string,
 );
 
 export default function SupaProvider() {

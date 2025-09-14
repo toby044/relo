@@ -7,8 +7,11 @@ export default function SiteHeader() {
   const pathname = usePathname();
 
   const links = [
-    { href: "/movies", name: "Movies" },
-    { href: "/series", name: "Series" },
+    { href: "/characters", name: "Characters" },
+    { href: "/spells", name: "Spells" },
+    { href: "/books", name: "Books" },
+    { href: "/houses", name: "Houses" },
+    { href: "/admin", name: "Admin" },
   ];
 
   return (

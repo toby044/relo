@@ -6,19 +6,26 @@ export default function FetchDataButton() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
-  async function fetchAndAddMovies() {
+  async function fetchAndAddPotterData() {
     setLoading(true);
     setMessage(null);
     try {
       const res = await fetch("api/fetchData", { method: "POST" });
       const json = await res.json();
       if (!res.ok) {
-        setMessage("Error: " + (json?.error ?? res.statusText));
+        setMessage(`Error: ${json?.error ?? res.statusText}`);
       } else {
-        setMessage("Success: inserted " + (json?.inserted ?? "unknown"));
+        const details = json?.details;
+        setMessage(
+          `Success: inserted ${json?.inserted ?? "unknown"} items total` +
+            (details
+              ? ` (${details.spells} spells, ${details.characters} characters, ${details.books} books, ${details.houses} houses)`
+              : ""),
+        );
       }
-    } catch (err: any) {
-      setMessage("Unexpected error: " + (err?.message ?? String(err)));
+    } catch (err: unknown) {
+      const error = err as Error;
+      setMessage(`Unexpected error: ${error?.message ?? String(error)}`);
     } finally {
       setLoading(false);
     }
@@ -27,11 +34,12 @@ export default function FetchDataButton() {
   return (
     <div>
       <button
-        onClick={fetchAndAddMovies}
+        type="button"
+        onClick={fetchAndAddPotterData}
         disabled={loading}
         className="px-4 py-2 rounded bg-sky-600 text-white disabled:opacity-50"
       >
-        {loading ? "Working..." : "Fetch & Add Movies"}
+        {loading ? "Working..." : "Fetch & Add Potter Data"}
       </button>
 
       {message && <p className="mt-2">{message}</p>}
