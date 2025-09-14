@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Relo - Harry Potter Database
 
-## Getting Started
+A Next.js application that displays Harry Potter characters, spells, books, and houses data from the [Potter API](https://potterapi-fedeperin.vercel.app).
 
-First, run the development server:
+## 🧙‍♂️ Features
 
+- **Characters**: Browse wizards, witches, and magical creatures
+- **Spells**: Explore magical spells and their uses  
+- **Books**: View the complete Harry Potter book series
+- **Houses**: Learn about the four Hogwarts houses
+- **Admin Panel**: Fetch and update data from the Potter API
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+- Supabase account (for database functionality)
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/toby044/relo.git
+cd relo
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Create environment file:
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Update `.env.local` with your Supabase credentials:
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-public-key
+```
 
-## Learn More
+5. Run the development server:
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Setting up Supabase
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Get your project URL and anon public key from Settings > API
+3. The application will automatically create the required tables when you first use the admin panel
 
-## Deploy on Vercel
+## 📊 Database Schema
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application creates the following tables in Supabase:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **characters**: fullName, nickname, hogwartsHouse, interpretedBy, children, image, birthdate
+- **spells**: spell, use  
+- **books**: title, originalTitle, releaseDate, description, pages, cover
+- **houses**: house, emoji, founder, colors, animal
+
+## 🔧 Usage
+
+1. **Admin Panel**: Visit `/admin` to fetch the latest data from the Potter API
+2. **Browse Data**: Navigate through Characters, Spells, Books, and Houses pages
+3. **Automatic Setup**: Tables are created automatically on first data fetch
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15.5.2
+- **Database**: Supabase
+- **Styling**: Tailwind CSS
+- **Language**: TypeScript
+- **Linting**: Biome
+
+## 📡 API Source
+
+Data is fetched from the [Potter API](https://potterapi-fedeperin.vercel.app):
+- Characters: `/en/characters`
+- Spells: `/en/spells` 
+- Books: `/en/books`
+- Houses: `/en/houses`
+
+## 🚀 Deployment
+
+The application can be deployed to any platform that supports Next.js:
+
+- [Vercel](https://vercel.com) (recommended)
+- [Netlify](https://netlify.com)
+- [Railway](https://railway.app)
+
+Make sure to set your environment variables in your deployment platform.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run the linter: `npm run lint`
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Potter API](https://potterapi-fedeperin.vercel.app) for providing the Harry Potter data
+- [Supabase](https://supabase.com) for the database platform
+- [Next.js](https://nextjs.org) for the React framework
