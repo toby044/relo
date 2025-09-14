@@ -1,29 +1,20 @@
-"use client";
+import { client } from "@/api/client";
 
-import { useParams } from "next/navigation";
+export default async function SeriesDetailPage({ params }) {
+  const { slug } = params;
+  const { data: series, error } = await client
+    .from("series")
+    .select("*")
+    .eq("slug", slug)
+    .single();
 
-const series = {
-  breakingbad: {
-    title: "Breaking Bad",
-    description: "A high school chemistry teacher turns to a life of crime.",
-  },
-  strangerthings: {
-    title: "Stranger Things",
-    description:
-      "A group of kids uncover supernatural mysteries in their small town.",
-  },
-};
-
-export default function SeriesDetailPage() {
-  const { slug } = useParams();
-  const serie = series[slug];
-
-  if (!series) return <div>Series not found</div>;
+  if (error || !series) return <div>Series not found</div>;
 
   return (
     <div>
-      <h1>{serie.title}</h1>
-      <p>{serie.description}</p>
+      <h1>{series.title}</h1>
+      <p>{series.description}</p>
+      {/* Add more fields as needed */}
     </div>
   );
 }

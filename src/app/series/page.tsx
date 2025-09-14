@@ -1,21 +1,16 @@
-import Link from "next/link";
+import { client } from "@/api/client";
 
-const series = [
-  { title: "Breaking Bad", slug: "breaking-bad" },
-  { title: "Stranger Things", slug: "stranger-things" },
-];
+export default async function SeriesPage() {
+  const { data: series, error } = await client.from("series").select("*");
+  if (error) return <div>Error loading series</div>;
 
-export default function SeriesPage() {
   return (
-    <div>
-      <h1>Series</h1>
-      <ul>
-        {series.map((serie) => (
-          <li key={serie.slug}>
-            <Link href={`/series/${serie.slug}`}>{serie.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {series.map(serie => (
+        <li key={serie.id}>
+          <a href={`/series/${serie.slug}`}>{serie.title}</a>
+        </li>
+      ))}
+    </ul>
   );
 }

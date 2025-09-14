@@ -1,25 +1,20 @@
-'use client'
+import { client } from "@/api/client";
 
-import { useParams } from 'next/navigation'
+export default async function MovieDetailPage({ params }) {
+  const { slug } = params;
+  const { data: movie, error } = await client
+    .from("movies")
+    .select("*")
+    .eq("slug", slug)
+    .single();
 
-const movies = {
-  inception: { title: "Inception", description: "A mind-bending thriller." },
-  interstellar: {
-    title: "Interstellar",
-    description: "A journey through space and time.",
-  },
-};
-
-export default function MovieDetailPage() {
-  const { slug: } = useParams();
-  const movie = movies[slug];
-
-  if (!movie) return <div>Movie not found</div>;
+  if (error || !movie) return <div>Movie not found</div>;
 
   return (
     <div>
       <h1>{movie.title}</h1>
       <p>{movie.description}</p>
+      {/* Add more fields as needed */}
     </div>
   );
 }

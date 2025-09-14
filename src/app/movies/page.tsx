@@ -1,21 +1,16 @@
-import Link from 'next/link';
+import { client } from "@/api/client";
 
-const movies = [
-  { title: 'Inception', slug: 'inception' },
-  { title: 'Interstellar', slug: 'interstellar' },
-];
+export default async function MoviesPage() {
+  const { data: movies, error } = await client.from("movies").select("*");
+  if (error) return <div>Error loading movies</div>;
 
-export default function MoviesPage() {
   return (
-    <div>
-      <h1>Movies</h1>
-      <ul>
-        {movies.map(movie => (
-          <li key={movie.slug}>
-            <Link href={`/movies/${movie.slug}`}>{movie.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {movies.map(movie => (
+        <li key={movie.id}>
+          <a href={`/movies/${movie.slug}`}>{movie.title}</a>
+        </li>
+      ))}
+    </ul>
   );
 }

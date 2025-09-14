@@ -15,9 +15,9 @@ export default function SiteHeader() {
     <header className="flex h-[9rem] mb-15">
       <Link
         href="/"
-        className="font-sans font-medium text-3xl grid place-content-center w-[10rem] h-[9rem] border-r border-b border-neutral-800 group "
+        className="font-sans font-medium text-3xl grid place-content-center w-[10rem] h-[9rem] border-r border-b border-neutral-800  "
       >
-        <span className="group-hover:translate-x-1 transition-transform duration-300">Relo</span>
+        <span className="">Relo</span>
       </Link>
 
       {links.map((link) => {
