@@ -11,7 +11,7 @@ export default function SiteHeader() {
     { href: "/spells", name: "Spells" },
     { href: "/books", name: "Books" },
     { href: "/houses", name: "Houses" },
-    { href: "/admin", name: "Admin" },
+    // { href: "/admin", name: "Admin" },
   ];
 
   return (
@@ -23,19 +23,19 @@ export default function SiteHeader() {
         <span className="">Relo</span>
       </Link>
 
-      {links.map((link) => {
+      {links.map((link, index) => {
         const isActive = pathname.startsWith(link.href);
 
         return (
           <Link
             key={link.href}
             href={link.href}
-            className={`c-site-header__link relative font-sans w-[8rem] bg-background h-[9rem] grid place-content-center border-r border-b border-neutral-800 transition-colors 
+            className={`c-site-header__link relative font-sans w-[8rem] bg-background h-[9rem] grid place-content-center border-r border-b border-neutral-800 transition-colors
               ${
                 isActive
                   ? " c-site-header__link--is-active"
                   : " hover:border-b-neutral-400"
-              }`}
+              }              `}
           >
             <span className="c-site-header__link-text text-foreground transition-colors delay-250">
               {link.name}
@@ -44,7 +44,7 @@ export default function SiteHeader() {
         );
       })}
 
-      <div className="h-[9rem] flex-grow border-r border-b border-neutral-800"></div>
+      <div className="h-[9rem] flex-grow  border-b border-neutral-800"></div>
     </header>
   );
 }
